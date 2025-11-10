@@ -56,6 +56,12 @@ ARROW_KEYS = {
 }
 
 class ClaudeCodeWrapperPTY:
+    # 状态定义
+    STATE_RUNNING = "running"        # 正常运行
+    STATE_WAITING_INPUT = "input"    # 等待用户输入新任务
+    STATE_WAITING_CONFIRM = "confirm" # 等待确认选择
+    STATE_COUNTDOWN = "countdown"     # 倒计时中
+
     def __init__(self, timeout=3):
         self.timeout = timeout
         self.master_fd = None
@@ -64,6 +70,55 @@ class ClaudeCodeWrapperPTY:
         self.max_context_lines = 10
         self.current_line = ""
         self.last_check_time = time.time()
+        self.current_state = self.STATE_RUNNING
+        self.countdown_value = 0
+        self.terminal_width = 80  # 默认终端宽度
+
+    def get_terminal_size(self):
+        """获取终端大小"""
+        try:
+            size = struct.unpack('hh', fcntl.ioctl(sys.stdout.fileno(), termios.TIOCGWINSZ, '1234'))
+            return size[1], size[0]  # 宽度, 高度
+        except:
+            return 80, 24
+
+    def show_status_indicator(self):
+        """在终端右上角显示状态指示器"""
+        width, height = self.get_terminal_size()
+
+        # 状态图标和文本
+        if self.current_state == self.STATE_RUNNING:
+            indicator = "🟢 AI监控中"
+        elif self.current_state == self.STATE_WAITING_INPUT:
+            indicator = "🔵 等待输入"
+        elif self.current_state == self.STATE_WAITING_CONFIRM:
+            indicator = "🟡 等待确认"
+        elif self.current_state == self.STATE_COUNTDOWN:
+            indicator = f"⏱️  倒计时 {self.countdown_value}s"
+        else:
+            indicator = "🟢 AI监控中"
+
+        # 计算指示器位置（右上角，留一些边距）
+        indicator_len = len(indicator.encode('utf-8').decode('utf-8', errors='ignore'))
+        # 使用实际字符宽度（中文字符算2个宽度）
+        display_len = sum(2 if ord(c) > 127 else 1 for c in indicator)
+        col = width - display_len - 2
+
+        # 使用 ANSI 转义序列
+        # \033[s - 保存光标位置
+        # \033[1;{col}H - 移动到第1行第col列
+        # \033[K - 清除从光标到行尾
+        # \033[u - 恢复光标位置
+        status_line = f"\033[s\033[1;{col}H\033[K{indicator}\033[u"
+
+        sys.stdout.write(status_line)
+        sys.stdout.flush()
+
+    def update_state(self, new_state, countdown=0):
+        """更新状态并显示"""
+        self.current_state = new_state
+        self.countdown_value = countdown
+        self.show_status_indicator()
 
     def add_to_context(self, line):
         """添加行到上下文缓冲区"""
@@ -74,6 +129,23 @@ class ClaudeCodeWrapperPTY:
     def get_context(self):
         """获取上下文（最近几行）"""
         return '\n'.join(self.recent_lines)
+
+    def detect_waiting_for_input(self, text):
+        """检测是否在等待用户输入新任务"""
+        # Claude Code 等待输入的常见模式
+        waiting_patterns = [
+            r'How can I help you\?',
+            r'What would you like me to do\?',
+            r'What can I help you with\?',
+            r'>\s*$',  # 单独的 > 提示符
+            r'What\'s next\?',
+        ]
+
+        for pattern in waiting_patterns:
+            if re.search(pattern, text, re.IGNORECASE):
+                return True
+
+        return False
 
     def detect_confirm_prompt(self, line):
         """检测是否是确认提示"""
@@ -188,6 +260,11 @@ class ClaudeCodeWrapperPTY:
             for line in lines[:-1]:
                 if line.strip():
                     self.add_to_context(line.strip())
+
+                    # 检测是否在等待用户输入新任务
+                    if self.detect_waiting_for_input(line):
+                        self.update_state(self.STATE_WAITING_INPUT)
+
             self.current_line = lines[-1]
 
         # 定期检测（避免过于频繁）
@@ -200,11 +277,17 @@ class ClaudeCodeWrapperPTY:
             is_menu, menu_items = self.detect_menu(context)
 
             if is_menu:
+                self.update_state(self.STATE_WAITING_CONFIRM)
                 print("\n🔍 检测到交互式菜单，AI 正在分析...")
-                time.sleep(self.timeout)
+
+                # 倒计时
+                for i in range(self.timeout, 0, -1):
+                    self.update_state(self.STATE_COUNTDOWN, i)
+                    time.sleep(1)
 
                 choice = self.handle_menu(menu_items)
                 print(f"✅ AI 选择: {choice}")
+                self.update_state(self.STATE_RUNNING)
 
                 # 发送选择
                 return choice + '\n'
@@ -213,12 +296,18 @@ class ClaudeCodeWrapperPTY:
             if self.current_line.strip():
                 options = self.detect_confirm_prompt(self.current_line)
                 if options:
+                    self.update_state(self.STATE_WAITING_CONFIRM)
                     prompt = re.sub(r'\s*[\[\(].*?[\]\)].*$', '', self.current_line).strip()
                     print(f"\n⏰ 检测到确认提示，倒计时 {self.timeout} 秒...")
-                    time.sleep(self.timeout)
+
+                    # 倒计时
+                    for i in range(self.timeout, 0, -1):
+                        self.update_state(self.STATE_COUNTDOWN, i)
+                        time.sleep(1)
 
                     choice = self.handle_confirm(prompt, options)
                     print(f"✅ AI 自动选择: {choice}")
+                    self.update_state(self.STATE_RUNNING)
 
                     # 发送选择
                     self.current_line = ""
@@ -247,6 +336,9 @@ class ClaudeCodeWrapperPTY:
             # 父进程：处理输入输出
             tty.setraw(sys.stdin.fileno())
 
+            # 显示初始状态
+            self.update_state(self.STATE_RUNNING)
+
             while True:
                 # 使用 select 监听输入和输出
                 r, w, e = select.select([sys.stdin, self.master_fd], [], [], 0.1)
@@ -255,6 +347,9 @@ class ClaudeCodeWrapperPTY:
                 if sys.stdin in r:
                     data = os.read(sys.stdin.fileno(), 1024)
                     if data:
+                        # 用户开始输入，更新状态
+                        if self.current_state == self.STATE_WAITING_INPUT:
+                            self.update_state(self.STATE_RUNNING)
                         os.write(self.master_fd, data)
 
                 # 处理程序输出
