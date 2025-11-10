@@ -105,6 +105,9 @@ class ClaudeCodeWrapperPTY:
         self.terminal_width = 80  # 默认终端宽度
         self.last_state_update = time.time()
         self.state_duration = 0  # 当前状态持续时间
+        # 调试模式：禁用状态指示器
+        self.debug_mode = os.environ.get('IZSH_DEBUG_MODE', '0') == '1'
+        self.show_indicator = os.environ.get('IZSH_SHOW_INDICATOR', '1') == '1'
 
     def get_terminal_size(self):
         """获取终端大小"""
@@ -116,6 +119,10 @@ class ClaudeCodeWrapperPTY:
 
     def show_status_indicator(self):
         """在终端右上角显示状态指示器"""
+        # 如果禁用状态指示器，直接返回
+        if not self.show_indicator:
+            return
+
         width, height = self.get_terminal_size()
 
         # 状态映射表
@@ -472,6 +479,10 @@ class ClaudeCodeWrapperPTY:
         """运行 Claude Code 并处理交互"""
         print("🤖 AI 自动确认模式已启用")
         print(f"提示：所有确认将在 {self.timeout} 秒后自动由 AI 选择")
+        if not self.show_indicator:
+            print("📋 状态指示器：已禁用（设置 IZSH_SHOW_INDICATOR=1 启用）")
+        if self.debug_mode:
+            print("🔧 调试模式：已启用")
         print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
         print("")
 
@@ -479,24 +490,61 @@ class ClaudeCodeWrapperPTY:
         is_tty = sys.stdin.isatty()
         old_tty = None
 
+        if self.debug_mode:
+            print(f"[DEBUG] stdin is TTY: {is_tty}")
+            print(f"[DEBUG] Command: {' '.join(command_args)}")
+
         # 设置终端为 raw 模式（仅在 TTY 时）
         if is_tty:
             try:
                 old_tty = termios.tcgetattr(sys.stdin)
-            except termios.error:
+                if self.debug_mode:
+                    print(f"[DEBUG] Terminal settings saved")
+            except termios.error as e:
                 is_tty = False
+                if self.debug_mode:
+                    print(f"[DEBUG] Failed to get terminal settings: {e}")
 
         try:
             # 创建伪终端
+            if self.debug_mode:
+                print(f"[DEBUG] Creating PTY...")
+
             self.pid, self.master_fd = pty.fork()
 
             if self.pid == 0:  # 子进程
                 # 在子进程中执行 Claude Code
+                if self.debug_mode:
+                    sys.stderr.write(f"[DEBUG] Child process starting: {command_args[0]}\n")
+                    sys.stderr.flush()
                 os.execvp(command_args[0], command_args)
 
             # 父进程：处理输入输出
+            if self.debug_mode:
+                print(f"[DEBUG] Parent process, child PID: {self.pid}")
+                print(f"[DEBUG] Master FD: {self.master_fd}")
+
+            # 设置 PTY 窗口大小
+            try:
+                width, height = self.get_terminal_size()
+                winsize = struct.pack('HHHH', height, width, 0, 0)
+                fcntl.ioctl(self.master_fd, termios.TIOCSWINSZ, winsize)
+                if self.debug_mode:
+                    print(f"[DEBUG] Set PTY window size: {width}x{height}")
+            except Exception as e:
+                if self.debug_mode:
+                    print(f"[DEBUG] Failed to set window size: {e}")
+
+            # 设置 master_fd 为非阻塞模式
+            flags = fcntl.fcntl(self.master_fd, fcntl.F_GETFL)
+            fcntl.fcntl(self.master_fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+            if self.debug_mode:
+                print(f"[DEBUG] Set master_fd to non-blocking mode")
+
             if is_tty:
                 tty.setraw(sys.stdin.fileno())
+                if self.debug_mode:
+                    print(f"[DEBUG] Set stdin to raw mode")
 
             # 显示初始状态（初始化中）
             self.update_state(self.STATE_INITIALIZING)
@@ -505,6 +553,10 @@ class ClaudeCodeWrapperPTY:
             # 切换到监控状态
             self.update_state(self.STATE_MONITORING)
 
+            if self.debug_mode:
+                print(f"[DEBUG] Entering main loop...")
+
+            loop_count = 0
             while True:
                 # 使用 select 监听输入和输出
                 # 只在 TTY 时监听 stdin
@@ -512,12 +564,21 @@ class ClaudeCodeWrapperPTY:
                 if is_tty:
                     watch_fds.append(sys.stdin)
 
+                if self.debug_mode and loop_count < 5:
+                    print(f"[DEBUG] Loop {loop_count}: Waiting for I/O (watching {len(watch_fds)} fds)...")
+                    loop_count += 1
+
                 r, w, e = select.select(watch_fds, [], [], 0.1)
+
+                if self.debug_mode and r:
+                    print(f"[DEBUG] Ready fds: {len(r)}")
 
                 # 处理用户输入（仅在 TTY 时）
                 if is_tty and sys.stdin in r:
                     data = os.read(sys.stdin.fileno(), 1024)
                     if data:
+                        if self.debug_mode:
+                            print(f"[DEBUG] User input: {len(data)} bytes")
                         # 用户开始输入，更新状态
                         if self.current_state == self.STATE_WAITING_TASK:
                             self.update_state(self.STATE_THINKING)
@@ -528,7 +589,12 @@ class ClaudeCodeWrapperPTY:
                     try:
                         data = os.read(self.master_fd, 1024)
                         if not data:
+                            if self.debug_mode:
+                                print(f"[DEBUG] No data from master_fd, child process may have exited")
                             break
+
+                        if self.debug_mode:
+                            print(f"[DEBUG] Received {len(data)} bytes from child")
 
                         # 处理输出并检测提示
                         text = data.decode('utf-8', errors='replace')
@@ -536,11 +602,15 @@ class ClaudeCodeWrapperPTY:
 
                         # 如果 AI 有响应，发送给程序
                         if ai_response:
+                            if self.debug_mode:
+                                print(f"[DEBUG] Sending AI response: {repr(ai_response)}")
                             time.sleep(0.2)
                             os.write(self.master_fd, ai_response.encode('utf-8'))
                             self.recent_lines = []
 
-                    except OSError:
+                    except OSError as e:
+                        if self.debug_mode:
+                            print(f"[DEBUG] OSError in read loop: {e}")
                         break
 
             # 等待子进程结束
