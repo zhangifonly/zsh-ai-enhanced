@@ -6051,7 +6051,7 @@ zexit(int val, enum zexit_t from_where)
 	    savehistfile(NULL, 1, writeflags);
 	}
 	if (islogin && !subsh) {
-	    sourcehome(".zlogout");
+	    sourcehome(".izlogout");
 #ifdef GLOBAL_ZLOGOUT
 	    if (isset(RCS) && isset(GLOBALRCS))
 		source(GLOBAL_ZLOGOUT);

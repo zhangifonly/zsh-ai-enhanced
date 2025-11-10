@@ -1,0 +1,247 @@
+{
+  "": {
+    "dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SwiftTerm.d",
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SwiftTerm.o",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/master.swiftdeps"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Apple/AppleTerminalView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/AppleTerminalView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/AppleTerminalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/AppleTerminalView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/AppleTerminalView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Apple/CaretView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CaretView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CaretView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CaretView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CaretView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Apple/Extensions.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Extensions.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Extensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Extensions.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Extensions.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Apple/TerminalViewDelegate.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalViewDelegate.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalViewDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalViewDelegate.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalViewDelegate.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Buffer.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Buffer.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Buffer~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Buffer.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Buffer.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/BufferLine.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferLine.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferLine~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferLine.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferLine.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/BufferSet.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferSet.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferSet~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferSet.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/BufferSet.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/CharData.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharData.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharData~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharData.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharData.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/CharSets.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharSets.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharSets~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharSets.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CharSets.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/CircularList.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CircularList.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CircularList~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CircularList.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/CircularList.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Colors.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Colors.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Colors~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Colors.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Colors.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/EscapeSequenceParser.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequenceParser.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequenceParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequenceParser.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequenceParser.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/EscapeSequences.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequences.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequences~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequences.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/EscapeSequences.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/ExternsionsTerminal.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/ExternsionsTerminal.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/ExternsionsTerminal~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/ExternsionsTerminal.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/ExternsionsTerminal.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/File.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/File.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/File~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/File.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/File.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/HeadlessTerminal.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/HeadlessTerminal.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/HeadlessTerminal~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/HeadlessTerminal.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/HeadlessTerminal.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Line.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Line.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Line~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Line.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Line.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/LocalProcess.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/LocalProcess.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/LocalProcess~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/LocalProcess.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/LocalProcess.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacAccessibilityService.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacAccessibilityService.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacAccessibilityService~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacAccessibilityService.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacAccessibilityService.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacCaretView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacCaretView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacCaretView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacCaretView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacCaretView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacDebugView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacDebugView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacDebugView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacDebugView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacDebugView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacExtensions.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacExtensions.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacExtensions.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacExtensions.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacLocalTerminalView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacLocalTerminalView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacLocalTerminalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacLocalTerminalView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacLocalTerminalView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Mac/MacTerminalView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacTerminalView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacTerminalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacTerminalView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/MacTerminalView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Position.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Position.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Position~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Position.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Position.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Pty.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Pty.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Pty~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Pty.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Pty.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/SearchService.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SearchService.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SearchService~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SearchService.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SearchService.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/SelectionService.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SelectionService.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SelectionService~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SelectionService.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SelectionService.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/SixelDcsHandler.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SixelDcsHandler.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SixelDcsHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SixelDcsHandler.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/SixelDcsHandler.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Terminal.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Terminal.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Terminal~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Terminal.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Terminal.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/TerminalOptions.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalOptions.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalOptions~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalOptions.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/TerminalOptions.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/Utilities.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Utilities.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Utilities.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/Utilities.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSAccessoryView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSAccessoryView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSAccessoryView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSAccessoryView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSAccessoryView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSCaretView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSCaretView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSCaretView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSCaretView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSCaretView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSDoubleButton.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSDoubleButton.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSDoubleButton~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSDoubleButton.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSDoubleButton.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSExtensions.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSExtensions.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSExtensions.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSExtensions.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSKeyboardView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSKeyboardView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSKeyboardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSKeyboardView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSKeyboardView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSTerminalView.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTerminalView.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTerminalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTerminalView.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTerminalView.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSTextInput.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextInput.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextInput~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextInput.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextInput.dia"
+  },
+  "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/checkouts/SwiftTerm/Sources/SwiftTerm/iOS/iOSTextStorage.swift": {
+    "object": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextStorage.swift.o",
+    "swiftmodule": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextStorage~partial.swiftmodule",
+    "swift-dependencies": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextStorage.swiftdeps",
+    "diagnostics": "/Users/zhangzhen/Documents/ClaudeCode/zsh/zsh/iZshNative/.build/arm64-apple-macosx/release/SwiftTerm.build/iOSTextStorage.dia"
+  }
+}

@@ -1471,7 +1471,8 @@ run_init_scripts(void)
 	    source("/etc/suid_profile");
     } else {
 #ifdef GLOBAL_ZSHENV
-	source(GLOBAL_ZSHENV);
+	/* iZsh: 禁用系统 zshenv 以避免冲突 */
+	/* source(GLOBAL_ZSHENV); */
 #endif
 
 	if (isset(RCS) && unset(PRIVILEGED))
@@ -1487,31 +1488,34 @@ run_init_scripts(void)
 		}
 	    }
 
-	    sourcehome(".zshenv");
+	    sourcehome(".izshenv");
 	}
 	if (islogin) {
 #ifdef GLOBAL_ZPROFILE
-	    if (isset(RCS) && isset(GLOBALRCS))
-		    source(GLOBAL_ZPROFILE);
+	    /* iZsh: 禁用系统 zprofile 以避免冲突 */
+	    /* if (isset(RCS) && isset(GLOBALRCS))
+		    source(GLOBAL_ZPROFILE); */
 #endif
 	    if (isset(RCS) && unset(PRIVILEGED))
-		sourcehome(".zprofile");
+		sourcehome(".izprofile");
 	}
 	if (interact) {
 #ifdef GLOBAL_ZSHRC
-	    if (isset(RCS) && isset(GLOBALRCS))
-		source(GLOBAL_ZSHRC);
+	    /* iZsh: 禁用系统 zshrc 以避免冲突 */
+	    /* if (isset(RCS) && isset(GLOBALRCS))
+		source(GLOBAL_ZSHRC); */
 #endif
 	    if (isset(RCS) && unset(PRIVILEGED))
-		sourcehome(".zshrc");
+		sourcehome(".izshrc");
 	}
 	if (islogin) {
 #ifdef GLOBAL_ZLOGIN
-	    if (isset(RCS) && isset(GLOBALRCS))
-		source(GLOBAL_ZLOGIN);
+	    /* iZsh: 禁用系统 zlogin 以避免冲突 */
+	    /* if (isset(RCS) && isset(GLOBALRCS))
+		source(GLOBAL_ZLOGIN); */
 #endif
 	    if (isset(RCS) && unset(PRIVILEGED))
-		sourcehome(".zlogin");
+		sourcehome(".izlogin");
 	}
     }
     noerrexit = 0;

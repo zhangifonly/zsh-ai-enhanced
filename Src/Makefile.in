@@ -50,7 +50,7 @@ DLLINK      = $(DLLD) $(LDFLAGS) $(LIBLDFLAGS) $(DLLDFLAGS) -o $@
 all: bin modules
 .PHONY: all
 
-bin: zsh$(EXEEXT)
+bin: izsh$(EXEEXT)
 .PHONY: bin
 
 modules: headers
@@ -80,7 +80,7 @@ NDRUNPATH =
 
 EXTRAZSHOBJS = @EXTRAZSHOBJS@
 
-zsh$(EXEEXT): $(@L@IBZSH) $(@L@STMP) $(MAIN_OBJS) zsh.export $(EXTRAZSHOBJS)
+izsh$(EXEEXT): $(@L@IBZSH) $(@L@STMP) $(MAIN_OBJS) zsh.export $(EXTRAZSHOBJS)
 	rm -f $@
 	$(@L@DRUNPATH) $(LINK) $(MAIN_OBJS) $(EXTRAZSHOBJS) $(@L@LIST) $(ZSH_@E@XPORT) $(@L@IBZSH) $(LIBS)
 
@@ -146,9 +146,9 @@ uninstall.bin: uninstall.bin-here
 .PHONY: install.bin uninstall.bin
 
 # install binary, creating install directory if necessary
-install.bin-here: zsh$(EXEEXT) $(INSTLIB)
+install.bin-here: izsh$(EXEEXT) $(INSTLIB)
 	${SHELL} $(sdir_top)/mkinstalldirs $(DESTDIR)$(bindir)
-	$(INSTALL_PROGRAM) $(STRIPFLAGS) zsh$(EXEEXT) $(DESTDIR)$(bindir)/$(tzsh)-$(VERSION)$(EXEEXT)
+	$(INSTALL_PROGRAM) $(STRIPFLAGS) izsh$(EXEEXT) $(DESTDIR)$(bindir)/$(tzsh)-$(VERSION)$(EXEEXT)
 	if test -f $(DESTDIR)$(bindir)/$(tzsh)$(EXEEXT); then \
 	    rm -f $(DESTDIR)$(bindir)/$(tzsh).old; \
 	    $(LN) $(DESTDIR)$(bindir)/$(tzsh)$(EXEEXT) $(DESTDIR)$(bindir)/$(tzsh).old; \
@@ -190,7 +190,7 @@ mostlyclean-here:
 .PHONY: mostlyclean-here
 
 clean-here:
-	rm -f modules.stamp zsh$(EXEEXT)
+	rm -f modules.stamp izsh$(EXEEXT)
 	rm -f libzsh-*.$(DL_EXT)
 .PHONY: clean-here
 

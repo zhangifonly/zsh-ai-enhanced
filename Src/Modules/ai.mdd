@@ -1,0 +1,7 @@
+name=zsh/ai
+link=dynamic
+load=no
+
+autofeatures="b:ai b:ai_suggest b:ai_analyze"
+
+objects="ai.o cJSON.o"

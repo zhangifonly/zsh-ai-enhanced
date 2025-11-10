@@ -25,14 +25,14 @@ dnl  Zsh Development Group have no obligation to provide maintenance,
 dnl  support, updates, enhancements, or modifications.
 dnl
 
-AC_INIT
+AC_INIT([izsh], [1.0.0])
 AC_CONFIG_SRCDIR([Src/zsh.h])
 AC_PREREQ([2.69])
 AC_CONFIG_HEADERS([config.h])
 
-dnl What version of zsh are we building ?
+dnl What version of izsh are we building ?
 . ${srcdir}/Config/version.mk
-echo "configuring for zsh $VERSION"
+echo "configuring for iZsh $VERSION"
 
 dnl ----------------------------------------------
 dnl CHECK FOR MACHINE/VENDOR/OPERATING SYSTEM TYPE
@@ -446,6 +446,21 @@ if test "x$enable_pcre" = xyes; then
   fi
 fi
 
+dnl Do you want to look for curl support?
+AC_ARG_ENABLE(curl,
+AS_HELP_STRING([--enable-curl],[enable the search for the curl library (may create run-time library dependencies)]))
+
+AC_ARG_VAR(CURL_CONFIG, [pathname of curl-config if it is not in PATH])
+if test "x$enable_curl" = xyes; then
+  AC_CHECK_PROG([CURL_CONFIG], curl-config, curl-config)
+  if test "x$CURL_CONFIG" = x; then
+    enable_curl=no
+    AC_MSG_WARN([curl-config not found: curl support is disabled.])
+    AC_MSG_NOTICE(
+      [Set CURL_CONFIG to pathname of curl-config if it is not in PATH.])
+  fi
+fi
+
 dnl Do you want to look for capability support?
 AC_ARG_ENABLE(cap,
 AS_HELP_STRING([--enable-cap],[enable the search for POSIX capabilities (may require additional headers to be added by hand)]))
@@ -631,6 +646,13 @@ dnl producing a warning.
 if test "x$enable_pcre" = xyes; then
   CPPFLAGS="`$PCRE_CONFIG --cflags` $CPPFLAGS"
   AC_CHECK_HEADERS([pcre2.h],,,[#define PCRE2_CODE_UNIT_WIDTH 8])
+fi
+
+dnl curl-config --cflags may produce a -I output which needs to go into
+dnl CPPFLAGS else configure's preprocessor tests don't pick it up.
+if test "x$enable_curl" = xyes; then
+  CPPFLAGS="`$CURL_CONFIG --cflags` $CPPFLAGS"
+  AC_CHECK_HEADERS([curl/curl.h])
 fi
 
 AC_CHECK_HEADERS(sys/time.h sys/times.h sys/select.h termcap.h termio.h \
@@ -1336,6 +1358,11 @@ fi
 if test x$enable_pcre = xyes; then
   LIBS="`$PCRE_CONFIG --libs8` $LIBS"
   AC_CHECK_FUNCS(pcre2_compile_8)
+fi
+
+if test x$enable_curl = xyes; then
+  LIBS="`$CURL_CONFIG --libs` $LIBS"
+  AC_CHECK_FUNCS(curl_easy_init)
 fi
 
 if test x$enable_cap = xyes; then
