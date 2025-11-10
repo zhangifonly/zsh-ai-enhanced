@@ -475,8 +475,16 @@ class ClaudeCodeWrapperPTY:
         print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
         print("")
 
-        # 设置终端为 raw 模式
-        old_tty = termios.tcgetattr(sys.stdin)
+        # 检查 stdin 是否是 TTY
+        is_tty = sys.stdin.isatty()
+        old_tty = None
+
+        # 设置终端为 raw 模式（仅在 TTY 时）
+        if is_tty:
+            try:
+                old_tty = termios.tcgetattr(sys.stdin)
+            except termios.error:
+                is_tty = False
 
         try:
             # 创建伪终端
@@ -487,7 +495,8 @@ class ClaudeCodeWrapperPTY:
                 os.execvp(command_args[0], command_args)
 
             # 父进程：处理输入输出
-            tty.setraw(sys.stdin.fileno())
+            if is_tty:
+                tty.setraw(sys.stdin.fileno())
 
             # 显示初始状态（初始化中）
             self.update_state(self.STATE_INITIALIZING)
@@ -498,10 +507,15 @@ class ClaudeCodeWrapperPTY:
 
             while True:
                 # 使用 select 监听输入和输出
-                r, w, e = select.select([sys.stdin, self.master_fd], [], [], 0.1)
+                # 只在 TTY 时监听 stdin
+                watch_fds = [self.master_fd]
+                if is_tty:
+                    watch_fds.append(sys.stdin)
 
-                # 处理用户输入
-                if sys.stdin in r:
+                r, w, e = select.select(watch_fds, [], [], 0.1)
+
+                # 处理用户输入（仅在 TTY 时）
+                if is_tty and sys.stdin in r:
                     data = os.read(sys.stdin.fileno(), 1024)
                     if data:
                         # 用户开始输入，更新状态
@@ -542,8 +556,9 @@ class ClaudeCodeWrapperPTY:
             return 130
 
         finally:
-            # 恢复终端设置
-            termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, old_tty)
+            # 恢复终端设置（仅在之前保存了设置时）
+            if old_tty is not None:
+                termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, old_tty)
 
 def main():
     if len(sys.argv) < 2:
