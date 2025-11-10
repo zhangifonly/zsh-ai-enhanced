@@ -56,11 +56,41 @@ ARROW_KEYS = {
 }
 
 class ClaudeCodeWrapperPTY:
-    # 状态定义
-    STATE_RUNNING = "running"        # 正常运行
-    STATE_WAITING_INPUT = "input"    # 等待用户输入新任务
-    STATE_WAITING_CONFIRM = "confirm" # 等待确认选择
-    STATE_COUNTDOWN = "countdown"     # 倒计时中
+    # 状态定义 - 完整版
+    # 1. 启动和初始化
+    STATE_STARTING = "starting"           # 🚀 启动中
+    STATE_INITIALIZING = "initializing"   # 🔄 初始化
+
+    # 2. 正常工作状态
+    STATE_THINKING = "thinking"           # 🤔 思考中
+    STATE_READING = "reading"             # 📖 读取文件
+    STATE_WRITING = "writing"             # ✏️ 编写代码
+    STATE_EXECUTING = "executing"         # ⚙️ 执行命令
+    STATE_SEARCHING = "searching"         # 🔍 搜索分析
+    STATE_MONITORING = "monitoring"       # 🟢 监控中
+
+    # 3. 交互和等待状态
+    STATE_WAITING_TASK = "waiting_task"   # 🔵 等待任务
+    STATE_WAITING_CONFIRM = "waiting_confirm"  # 🟡 等待确认
+    STATE_WAITING_CHOICE = "waiting_choice"    # 🟠 等待选择
+    STATE_COUNTDOWN = "countdown"         # ⏱️ 倒计时 Ns
+
+    # 4. AI 决策状态
+    STATE_AI_ANALYZING = "ai_analyzing"   # 🧠 AI分析中
+    STATE_AI_SELECTED = "ai_selected"     # ✅ AI已选择
+    STATE_AI_EXECUTING = "ai_executing"   # 🎯 AI执行中
+
+    # 5. 特殊和异常状态
+    STATE_WARNING = "warning"             # ⚠️ 需要注意
+    STATE_ERROR = "error"                 # ❌ 错误发生
+    STATE_PAUSED = "paused"               # ⏸️ 用户暂停
+    STATE_INTERRUPTED = "interrupted"     # 🛑 用户中断
+    STATE_DEBUG = "debug"                 # 🔧 调试模式
+
+    # 6. 完成和结束状态
+    STATE_TASK_DONE = "task_done"         # ✨ 任务完成
+    STATE_ALL_DONE = "all_done"           # 🎉 全部完成
+    STATE_EXITED = "exited"               # 👋 已退出
 
     def __init__(self, timeout=3):
         self.timeout = timeout
@@ -70,9 +100,11 @@ class ClaudeCodeWrapperPTY:
         self.max_context_lines = 10
         self.current_line = ""
         self.last_check_time = time.time()
-        self.current_state = self.STATE_RUNNING
+        self.current_state = self.STATE_STARTING
         self.countdown_value = 0
         self.terminal_width = 80  # 默认终端宽度
+        self.last_state_update = time.time()
+        self.state_duration = 0  # 当前状态持续时间
 
     def get_terminal_size(self):
         """获取终端大小"""
@@ -86,17 +118,48 @@ class ClaudeCodeWrapperPTY:
         """在终端右上角显示状态指示器"""
         width, height = self.get_terminal_size()
 
-        # 状态图标和文本
-        if self.current_state == self.STATE_RUNNING:
-            indicator = "🟢 AI监控中"
-        elif self.current_state == self.STATE_WAITING_INPUT:
-            indicator = "🔵 等待输入"
-        elif self.current_state == self.STATE_WAITING_CONFIRM:
-            indicator = "🟡 等待确认"
-        elif self.current_state == self.STATE_COUNTDOWN:
+        # 状态映射表
+        state_indicators = {
+            # 1. 启动和初始化
+            self.STATE_STARTING: "🚀 启动中",
+            self.STATE_INITIALIZING: "🔄 初始化",
+
+            # 2. 正常工作状态
+            self.STATE_THINKING: "🤔 思考中",
+            self.STATE_READING: "📖 读取文件",
+            self.STATE_WRITING: "✏️ 编写代码",
+            self.STATE_EXECUTING: "⚙️ 执行命令",
+            self.STATE_SEARCHING: "🔍 搜索分析",
+            self.STATE_MONITORING: "🟢 监控中",
+
+            # 3. 交互和等待状态
+            self.STATE_WAITING_TASK: "🔵 等待任务",
+            self.STATE_WAITING_CONFIRM: "🟡 等待确认",
+            self.STATE_WAITING_CHOICE: "🟠 等待选择",
+
+            # 4. AI 决策状态
+            self.STATE_AI_ANALYZING: "🧠 AI分析中",
+            self.STATE_AI_SELECTED: "✅ AI已选择",
+            self.STATE_AI_EXECUTING: "🎯 AI执行中",
+
+            # 5. 特殊和异常状态
+            self.STATE_WARNING: "⚠️ 需要注意",
+            self.STATE_ERROR: "❌ 错误发生",
+            self.STATE_PAUSED: "⏸️ 用户暂停",
+            self.STATE_INTERRUPTED: "🛑 用户中断",
+            self.STATE_DEBUG: "🔧 调试模式",
+
+            # 6. 完成和结束状态
+            self.STATE_TASK_DONE: "✨ 任务完成",
+            self.STATE_ALL_DONE: "🎉 全部完成",
+            self.STATE_EXITED: "👋 已退出",
+        }
+
+        # 特殊处理倒计时状态
+        if self.current_state == self.STATE_COUNTDOWN:
             indicator = f"⏱️  倒计时 {self.countdown_value}s"
         else:
-            indicator = "🟢 AI监控中"
+            indicator = state_indicators.get(self.current_state, "🟢 监控中")
 
         # 计算指示器位置（右上角，留一些边距）
         indicator_len = len(indicator.encode('utf-8').decode('utf-8', errors='ignore'))
@@ -146,6 +209,62 @@ class ClaudeCodeWrapperPTY:
                 return True
 
         return False
+
+    def detect_state_from_output(self, text):
+        """从输出文本智能检测当前状态"""
+        text_lower = text.lower()
+
+        # 思考和规划
+        thinking_keywords = ['analyzing', 'planning', 'considering', 'let me', 'i\'ll', 'i will',
+                            '分析', '规划', '让我', '我将', '我会']
+        if any(kw in text_lower for kw in thinking_keywords):
+            return self.STATE_THINKING
+
+        # 读取文件
+        reading_keywords = ['reading', 'read', 'looking at', 'checking', 'reviewing',
+                          '读取', '查看', '检查', '审查']
+        if any(kw in text_lower for kw in reading_keywords):
+            if 'file' in text_lower or 'code' in text_lower or '文件' in text:
+                return self.STATE_READING
+
+        # 编写代码
+        writing_keywords = ['writing', 'creating', 'modifying', 'editing', 'updating',
+                          '编写', '创建', '修改', '更新']
+        if any(kw in text_lower for kw in writing_keywords):
+            if any(w in text_lower for w in ['file', 'code', 'function', '文件', '代码', '函数']):
+                return self.STATE_WRITING
+
+        # 执行命令
+        executing_keywords = ['running', 'executing', 'command', 'bash', 'git', 'npm',
+                            '运行', '执行', '命令']
+        if any(kw in text_lower for kw in executing_keywords):
+            return self.STATE_EXECUTING
+
+        # 搜索分析
+        searching_keywords = ['searching', 'finding', 'looking for', 'grep', 'search',
+                            '搜索', '查找', '寻找']
+        if any(kw in text_lower for kw in searching_keywords):
+            return self.STATE_SEARCHING
+
+        # 错误检测
+        error_keywords = ['error', 'failed', 'exception', 'cannot', 'unable',
+                        '错误', '失败', '异常', '无法']
+        if any(kw in text_lower for kw in error_keywords):
+            return self.STATE_ERROR
+
+        # 警告检测
+        warning_keywords = ['warning', 'caution', 'notice', 'important',
+                          '警告', '注意', '重要']
+        if any(kw in text_lower for kw in warning_keywords):
+            return self.STATE_WARNING
+
+        # 任务完成
+        done_keywords = ['done', 'completed', 'finished', 'success',
+                       '完成', '成功']
+        if any(kw in text_lower for kw in done_keywords):
+            return self.STATE_TASK_DONE
+
+        return None  # 未检测到特定状态
 
     def detect_confirm_prompt(self, line):
         """检测是否是确认提示"""
@@ -263,7 +382,17 @@ class ClaudeCodeWrapperPTY:
 
                     # 检测是否在等待用户输入新任务
                     if self.detect_waiting_for_input(line):
-                        self.update_state(self.STATE_WAITING_INPUT)
+                        self.update_state(self.STATE_WAITING_TASK)
+                        continue
+
+                    # 智能检测状态（仅在非等待状态时）
+                    if self.current_state not in [self.STATE_WAITING_TASK,
+                                                   self.STATE_WAITING_CONFIRM,
+                                                   self.STATE_WAITING_CHOICE,
+                                                   self.STATE_COUNTDOWN]:
+                        detected_state = self.detect_state_from_output(line)
+                        if detected_state:
+                            self.update_state(detected_state)
 
             self.current_line = lines[-1]
 
@@ -277,17 +406,29 @@ class ClaudeCodeWrapperPTY:
             is_menu, menu_items = self.detect_menu(context)
 
             if is_menu:
-                self.update_state(self.STATE_WAITING_CONFIRM)
+                self.update_state(self.STATE_WAITING_CHOICE)
                 print("\n🔍 检测到交互式菜单，AI 正在分析...")
+
+                # AI 分析状态
+                self.update_state(self.STATE_AI_ANALYZING)
+                time.sleep(0.5)
 
                 # 倒计时
                 for i in range(self.timeout, 0, -1):
                     self.update_state(self.STATE_COUNTDOWN, i)
                     time.sleep(1)
 
+                # AI 执行
+                self.update_state(self.STATE_AI_EXECUTING)
                 choice = self.handle_menu(menu_items)
+
+                # AI 已选择
+                self.update_state(self.STATE_AI_SELECTED)
                 print(f"✅ AI 选择: {choice}")
-                self.update_state(self.STATE_RUNNING)
+                time.sleep(1)
+
+                # 恢复监控
+                self.update_state(self.STATE_MONITORING)
 
                 # 发送选择
                 return choice + '\n'
@@ -300,14 +441,26 @@ class ClaudeCodeWrapperPTY:
                     prompt = re.sub(r'\s*[\[\(].*?[\]\)].*$', '', self.current_line).strip()
                     print(f"\n⏰ 检测到确认提示，倒计时 {self.timeout} 秒...")
 
+                    # AI 分析状态
+                    self.update_state(self.STATE_AI_ANALYZING)
+                    time.sleep(0.5)
+
                     # 倒计时
                     for i in range(self.timeout, 0, -1):
                         self.update_state(self.STATE_COUNTDOWN, i)
                         time.sleep(1)
 
+                    # AI 执行
+                    self.update_state(self.STATE_AI_EXECUTING)
                     choice = self.handle_confirm(prompt, options)
+
+                    # AI 已选择
+                    self.update_state(self.STATE_AI_SELECTED)
                     print(f"✅ AI 自动选择: {choice}")
-                    self.update_state(self.STATE_RUNNING)
+                    time.sleep(1)
+
+                    # 恢复监控
+                    self.update_state(self.STATE_MONITORING)
 
                     # 发送选择
                     self.current_line = ""
@@ -336,8 +489,12 @@ class ClaudeCodeWrapperPTY:
             # 父进程：处理输入输出
             tty.setraw(sys.stdin.fileno())
 
-            # 显示初始状态
-            self.update_state(self.STATE_RUNNING)
+            # 显示初始状态（初始化中）
+            self.update_state(self.STATE_INITIALIZING)
+            time.sleep(0.5)
+
+            # 切换到监控状态
+            self.update_state(self.STATE_MONITORING)
 
             while True:
                 # 使用 select 监听输入和输出
@@ -348,8 +505,8 @@ class ClaudeCodeWrapperPTY:
                     data = os.read(sys.stdin.fileno(), 1024)
                     if data:
                         # 用户开始输入，更新状态
-                        if self.current_state == self.STATE_WAITING_INPUT:
-                            self.update_state(self.STATE_RUNNING)
+                        if self.current_state == self.STATE_WAITING_TASK:
+                            self.update_state(self.STATE_THINKING)
                         os.write(self.master_fd, data)
 
                 # 处理程序输出
@@ -373,10 +530,12 @@ class ClaudeCodeWrapperPTY:
                         break
 
             # 等待子进程结束
+            self.update_state(self.STATE_EXITED)
             pid, status = os.waitpid(self.pid, 0)
             return os.WEXITSTATUS(status)
 
         except KeyboardInterrupt:
+            self.update_state(self.STATE_INTERRUPTED)
             print("\n⚠️ 用户中断")
             if self.pid:
                 os.kill(self.pid, signal.SIGTERM)
