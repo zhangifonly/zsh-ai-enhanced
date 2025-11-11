@@ -502,12 +502,7 @@ class ClaudeCodeWrapperPTY:
         # 清屏：清除之前的文字残留
         print("\033[2J\033[H", end="", flush=True)
 
-        # 启动提示：一闪即逝（0.3秒）
-        print("🤖 AI 自动确认模式", file=sys.stderr, flush=True)
-        time.sleep(0.3)
-
-        # 再次清屏，给 Claude Code 一个完全干净的屏幕
-        print("\033[2J\033[H", end="", flush=True)
+        # 不再显示启动提示，让 Claude Code 的信息完整呈现
 
         # 检查 stdin 是否是 TTY
         is_tty = sys.stdin.isatty()
