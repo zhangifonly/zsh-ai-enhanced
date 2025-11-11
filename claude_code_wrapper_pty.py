@@ -107,7 +107,8 @@ class ClaudeCodeWrapperPTY:
         self.state_duration = 0  # 当前状态持续时间
         # 调试模式：禁用状态指示器
         self.debug_mode = os.environ.get('IZSH_DEBUG_MODE', '0') == '1'
-        self.show_indicator = os.environ.get('IZSH_SHOW_INDICATOR', '1') == '1'
+        # 状态指示器默认禁用，避免干扰 Claude Code 的布局
+        self.show_indicator = os.environ.get('IZSH_SHOW_INDICATOR', '0') == '1'
 
     def get_terminal_size(self):
         """获取终端大小"""
