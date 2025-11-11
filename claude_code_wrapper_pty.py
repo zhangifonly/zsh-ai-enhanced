@@ -105,10 +105,10 @@ class ClaudeCodeWrapperPTY:
         self.terminal_width = 80  # 默认终端宽度
         self.last_state_update = time.time()
         self.state_duration = 0  # 当前状态持续时间
-        # 调试模式：禁用状态指示器
+        # 调试模式
         self.debug_mode = os.environ.get('IZSH_DEBUG_MODE', '0') == '1'
-        # 状态指示器默认禁用，避免干扰 Claude Code 的布局
-        self.show_indicator = os.environ.get('IZSH_SHOW_INDICATOR', '0') == '1'
+        # 状态指示器默认启用，显示在终端标题栏（不干扰屏幕内容）
+        self.show_indicator = os.environ.get('IZSH_SHOW_INDICATOR', '1') == '1'
 
     def get_terminal_size(self):
         """获取终端大小"""
@@ -119,12 +119,10 @@ class ClaudeCodeWrapperPTY:
             return 80, 24
 
     def show_status_indicator(self):
-        """在终端右上角显示状态指示器"""
+        """在终端标题栏显示状态指示器（不干扰屏幕内容）"""
         # 如果禁用状态指示器，直接返回
         if not self.show_indicator:
             return
-
-        width, height = self.get_terminal_size()
 
         # 状态映射表
         state_indicators = {
@@ -165,25 +163,16 @@ class ClaudeCodeWrapperPTY:
 
         # 特殊处理倒计时状态
         if self.current_state == self.STATE_COUNTDOWN:
-            indicator = f"⏱️  倒计时 {self.countdown_value}s"
+            indicator = f"⏱️ 倒计时 {self.countdown_value}s"
         else:
             indicator = state_indicators.get(self.current_state, "🟢 监控中")
 
-        # 计算指示器位置（右上角，留一些边距）
-        indicator_len = len(indicator.encode('utf-8').decode('utf-8', errors='ignore'))
-        # 使用实际字符宽度（中文字符算2个宽度）
-        display_len = sum(2 if ord(c) > 127 else 1 for c in indicator)
-        col = width - display_len - 2
-
-        # 使用 ANSI 转义序列
-        # \033[s - 保存光标位置
-        # \033[1;{col}H - 移动到第1行第col列
-        # \033[K - 清除从光标到行尾
-        # \033[u - 恢复光标位置
-        status_line = f"\033[s\033[1;{col}H\033[K{indicator}\033[u"
-
-        sys.stdout.write(status_line)
-        sys.stdout.flush()
+        # 使用终端标题栏显示状态（完全不占用屏幕空间）
+        # \033]0; 设置终端标题
+        # \007 结束标题设置
+        title = f"Claude Code - {indicator}"
+        sys.stderr.write(f"\033]0;{title}\007")
+        sys.stderr.flush()
 
     def update_state(self, new_state, countdown=0):
         """更新状态并显示"""
