@@ -55,7 +55,7 @@
 export DYLD_LIBRARY_PATH=/Users/zhangzhen/anaconda3/lib
 export IZSH_AI_ENABLED=1
 export IZSH_AI_API_URL="https://q.quuvv.cn/v1"
-export IZSH_AI_API_KEY="sk-RQxMGajqZMP6cqxZ4fI7D7fjWvMAm0ZfNUbJg4rzIeXa39SP"
+export IZSH_AI_API_KEY="YOUR_API_KEY_HERE"
 export IZSH_AI_MODEL="claude-sonnet-4-5"
 export IZSH_AI_INTERVENTION_LEVEL="suggest"
 ```
@@ -95,7 +95,7 @@ export IZSH_AI_INTERVENTION_LEVEL="suggest"
 1. **访问** https://q.quuvv.cn
 2. **登录**管理后台
 3. **找到**令牌管理页面
-4. **选择**令牌：sk-RQxMGajqZMP6cqxZ4fI7D7fjWvMAm0ZfNUbJg4rzIeXa39SP
+4. **选择**令牌：YOUR_API_KEY_HERE
 5. **勾选**至少一个模型（推荐 `claude-sonnet-4-5`）
 6. **保存**配置
 

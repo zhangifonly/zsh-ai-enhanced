@@ -155,7 +155,7 @@ export IZSH_AI_ENABLED=1
 
 # AI API 配置
 export IZSH_AI_API_URL="https://q.quuvv.cn/v1"
-export IZSH_AI_API_KEY="sk-RQxMGajqZMP6cqxZ4fI7D7fjWvMAm0ZfNUbJg4rzIeXa39SP"
+export IZSH_AI_API_KEY="YOUR_API_KEY_HERE"
 export IZSH_AI_MODEL="claude-3-5-haiku-20241022"
 export IZSH_AI_API_TYPE="anthropic"
 

@@ -155,3 +155,40 @@ Src/Zle/zle_widget.h
 
 Test/*.tmp
 /.project
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Swift/Xcode
+iZshNative/.build/
+iZshNative/.swiftpm/
+*.xcodeproj
+*.xcworkspace
+DerivedData/
+
+# Claude Code 临时文件
+.claude/operations-log.md
+.claude/test_*.sh
+
+# 参考源代码（不上传）
+# 如果有其他参考代码目录，请在下面添加
+
+# 敏感信息（密码、密钥等）
+*_CONFIG_GUIDE.md
+.izshrc
+*.secret
+*.key
+*password*
+*credentials*
+
+# 包含真实 API 密钥的文档
+NEWAPI_CONFIG_GUIDE.md
+ANTHROPIC_API_INTEGRATION.md
