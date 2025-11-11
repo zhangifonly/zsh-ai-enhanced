@@ -190,6 +190,12 @@ class ClaudeCodeWrapperPTY:
         self.countdown_value = countdown
         self.show_status_indicator()
 
+    def strip_ansi(self, text):
+        """移除 ANSI 转义序列"""
+        # 移除 ANSI 颜色和控制序列
+        ansi_escape = re.compile(r'\x1b\[[0-9;]*[A-Za-z]|\x1b\][^\x07]*\x07|\x1b[=>]|[\x00-\x1f]', re.UNICODE)
+        return ansi_escape.sub('', text)
+
     def add_to_context(self, line):
         """添加行到上下文缓冲区"""
         self.recent_lines.append(line)
@@ -209,6 +215,10 @@ class ClaudeCodeWrapperPTY:
             r'What can I help you with\?',
             r'>\s*$',  # 单独的 > 提示符
             r'What\'s next\?',
+            # Claude Code 2.0 的提示格式
+            r'>\s+Try\s+"write',  # > Try "write a test for <filepath>"
+            r'>\s+.*for shortcuts',  # Claude Code 的输入提示行
+            r'Claude Code.*v\d+\.\d+',  # Claude Code 欢迎界面
         ]
 
         for pattern in waiting_patterns:
@@ -387,8 +397,18 @@ class ClaudeCodeWrapperPTY:
                 if line.strip():
                     self.add_to_context(line.strip())
 
+                    # 清理 ANSI 转义序列后再检测
+                    clean_line = self.strip_ansi(line)
+
+                    if self.debug_mode and clean_line.strip():
+                        # 只在前几行显示清理后的文本
+                        if len(self.recent_lines) <= 10:
+                            print(f"[DEBUG] Clean line: {repr(clean_line[:80])}")
+
                     # 检测是否在等待用户输入新任务
-                    if self.detect_waiting_for_input(line):
+                    if self.detect_waiting_for_input(clean_line):
+                        if self.debug_mode:
+                            print(f"[DEBUG] Detected waiting for input")
                         self.update_state(self.STATE_WAITING_TASK)
                         continue
 
@@ -397,8 +417,10 @@ class ClaudeCodeWrapperPTY:
                                                    self.STATE_WAITING_CONFIRM,
                                                    self.STATE_WAITING_CHOICE,
                                                    self.STATE_COUNTDOWN]:
-                        detected_state = self.detect_state_from_output(line)
+                        detected_state = self.detect_state_from_output(clean_line)
                         if detected_state:
+                            if self.debug_mode:
+                                print(f"[DEBUG] State changed to: {detected_state}")
                             self.update_state(detected_state)
 
             self.current_line = lines[-1]
