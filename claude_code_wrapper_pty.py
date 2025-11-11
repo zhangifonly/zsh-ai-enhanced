@@ -253,10 +253,19 @@ class ClaudeCodeWrapperPTY:
         if any(kw in text_lower for kw in searching_keywords):
             return self.STATE_SEARCHING
 
-        # 错误检测
-        error_keywords = ['error', 'failed', 'exception', 'cannot', 'unable',
-                        '错误', '失败', '异常', '无法']
-        if any(kw in text_lower for kw in error_keywords):
+        # 错误检测（更严格，避免误报）
+        # 只检测真正的错误消息格式，而非包含关键词的普通文本
+        error_patterns = [
+            r'(?:^|\s)error:',           # "Error:" 开头的消息
+            r'(?:^|\s)fatal:',           # "Fatal:" 开头的消息
+            r'failed with.*error',       # "failed with error" 格式
+            r'exception.*occurred',      # "exception occurred" 格式
+            r'traceback',                # Python traceback
+            r'错误：',                    # 中文错误消息
+            r'失败：',                    # 中文失败消息
+            r'异常：',                    # 中文异常消息
+        ]
+        if any(re.search(pattern, text_lower) for pattern in error_patterns):
             return self.STATE_ERROR
 
         # 警告检测
