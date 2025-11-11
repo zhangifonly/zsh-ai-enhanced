@@ -120,6 +120,26 @@
       "priority": 10,
       "commands": ["npm", "yarn", "pnpm"],
       "patterns": ["^(npm|yarn|pnpm)\\s+"]
+    },
+    "claude": {
+      "name": "Claude Code AI 编程专家",
+      "description": "Claude Code 使用、AI 辅助编程和提示词工程",
+      "template": "templates/claude.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["claude"],
+      "patterns": ["^claude\\s+"]
+    },
+    "codex": {
+      "name": "GitHub Copilot / Codex 专家",
+      "description": "GitHub Copilot CLI、VSCode 扩展和 AI 编程工具",
+      "template": "templates/codex.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["gh-copilot", "copilot", "codex"],
+      "patterns": ["^(gh\\s+copilot|copilot|codex)\\s+"]
     }
   },
   "settings": {
