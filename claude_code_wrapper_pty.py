@@ -402,9 +402,8 @@ class ClaudeCodeWrapperPTY:
                         self.update_state(self.STATE_WAITING_TASK)
                         continue
 
-                    # 智能检测状态（仅在非等待状态时）
-                    if self.current_state not in [self.STATE_WAITING_TASK,
-                                                   self.STATE_WAITING_CONFIRM,
+                    # 智能检测状态（在等待确认、等待选择、倒计时时不检测）
+                    if self.current_state not in [self.STATE_WAITING_CONFIRM,
                                                    self.STATE_WAITING_CHOICE,
                                                    self.STATE_COUNTDOWN]:
                         detected_state = self.detect_state_from_output(clean_line)
@@ -603,6 +602,11 @@ class ClaudeCodeWrapperPTY:
 
                         if self.debug_mode:
                             print(f"[DEBUG] Received {len(data)} bytes from child")
+
+                        # 服务器开始返回数据，更新状态
+                        if self.current_state == self.STATE_WAITING_TASK:
+                            # 有数据返回说明服务器正在思考/生成回复
+                            self.update_state(self.STATE_THINKING)
 
                         # 处理输出并检测提示
                         text = data.decode('utf-8', errors='replace')
