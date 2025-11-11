@@ -1,0 +1,139 @@
+{
+  "version": "1.0.0",
+  "experts": {
+    "git": {
+      "name": "Git 版本控制专家",
+      "description": "帮助管理代码版本、分支和协作",
+      "template": "templates/git.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["git", "git-*"],
+      "patterns": ["^git\\s+"]
+    },
+    "vim": {
+      "name": "Vim 编辑器专家",
+      "description": "高效使用 Vim 编辑文本和代码",
+      "template": "templates/vim.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["vim", "vi", "nvim"],
+      "patterns": ["^n?vim?\\s+"]
+    },
+    "python": {
+      "name": "Python REPL 专家",
+      "description": "Python 交互式编程和调试",
+      "template": "templates/python.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["python", "python3", "ipython"],
+      "patterns": ["^(python|python3|ipython)\\s*$"]
+    },
+    "node": {
+      "name": "Node.js REPL 专家",
+      "description": "JavaScript/Node.js 交互式编程",
+      "template": "templates/node.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["node"],
+      "patterns": ["^node\\s*$"]
+    },
+    "docker": {
+      "name": "Docker 容器专家",
+      "description": "容器化应用部署和管理",
+      "template": "templates/docker.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["docker", "docker-compose"],
+      "patterns": ["^docker(-compose)?\\s+"]
+    },
+    "kubectl": {
+      "name": "Kubernetes 集群专家",
+      "description": "K8s 集群管理和应用编排",
+      "template": "templates/kubectl.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["kubectl", "k8s"],
+      "patterns": ["^kubectl\\s+"]
+    },
+    "mysql": {
+      "name": "MySQL 数据库专家",
+      "description": "SQL 查询和数据库管理",
+      "template": "templates/mysql.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["mysql"],
+      "patterns": ["^mysql\\s+"]
+    },
+    "redis-cli": {
+      "name": "Redis 缓存专家",
+      "description": "Redis 数据操作和性能优化",
+      "template": "templates/redis-cli.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["redis-cli"],
+      "patterns": ["^redis-cli\\s+"]
+    },
+    "psql": {
+      "name": "PostgreSQL 数据库专家",
+      "description": "PostgreSQL 查询和管理",
+      "template": "templates/psql.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["psql"],
+      "patterns": ["^psql\\s+"]
+    },
+    "ssh": {
+      "name": "SSH 远程连接专家",
+      "description": "安全远程服务器管理",
+      "template": "templates/ssh.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["ssh"],
+      "patterns": ["^ssh\\s+"]
+    },
+    "tmux": {
+      "name": "Tmux 终端复用专家",
+      "description": "终端会话管理和窗口布局",
+      "template": "templates/tmux.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["tmux"],
+      "patterns": ["^tmux\\s+"]
+    },
+    "npm": {
+      "name": "NPM 包管理专家",
+      "description": "Node.js 包管理和项目配置",
+      "template": "templates/npm.prompt",
+      "enabled": true,
+      "auto_load": true,
+      "priority": 10,
+      "commands": ["npm", "yarn", "pnpm"],
+      "patterns": ["^(npm|yarn|pnpm)\\s+"]
+    }
+  },
+  "settings": {
+    "auto_detect": true,
+    "show_welcome": true,
+    "expert_timeout": 3600,
+    "fallback_expert": "general",
+    "cache_prompts": true,
+    "log_level": "info"
+  },
+  "ui": {
+    "panel_shortcut": "Ctrl+E",
+    "show_status": true,
+    "status_position": "top-right",
+    "theme": "default"
+  }
+}

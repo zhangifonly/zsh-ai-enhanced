@@ -13,10 +13,10 @@ echo "   - Claude: $(which claude)"
 echo ""
 
 # 2. 检查进程
-echo "2. 清理旧进程..."
-pkill -9 -f claude_code_wrapper_pty.py 2>/dev/null
-pkill -9 claude 2>/dev/null
-echo "   ✓ 已清理旧进程"
+echo "2. 清理环境..."
+# 只清理 wrapper 进程，不影响用户的其他 claude 会话
+pkill -9 -f "claude_code_wrapper_pty.py" 2>/dev/null
+echo "   ✓ 已清理测试环境"
 echo ""
 
 # 3. 测试 Claude Code 原生命令
@@ -60,11 +60,12 @@ for i in {1..10}; do
     if [ $i -eq 10 ]; then
         echo ""
         echo "=========================================="
-        echo "[10秒超时] 强制终止..."
+        echo "[10秒超时] 强制终止测试进程..."
         echo "=========================================="
+        # 只杀掉测试启动的这个 wrapper 进程及其子进程
         kill -9 $WRAPPER_PID 2>/dev/null
-        pkill -9 -f claude_code_wrapper_pty.py 2>/dev/null
-        pkill -9 claude 2>/dev/null
+        # 查找并杀掉这个 wrapper 的子进程（claude）
+        pkill -9 -P $WRAPPER_PID 2>/dev/null
     fi
 done
 

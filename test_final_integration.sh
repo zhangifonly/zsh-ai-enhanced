@@ -6,12 +6,11 @@ echo "Claude Code AI Wrapper - 最终集成测试"
 echo "=========================================="
 echo ""
 
-# 清理旧进程
-echo "1. 清理环境..."
-pkill -9 -f claude_code_wrapper_pty.py 2>/dev/null
-pkill -9 claude 2>/dev/null
+# 清理测试环境（不影响用户其他会话）
+echo "1. 清理测试环境..."
+pkill -9 -f "claude_code_wrapper_pty.py" 2>/dev/null
 sleep 1
-echo "   ✓ 环境已清理"
+echo "   ✓ 测试环境已清理"
 echo ""
 
 # 检查配置
@@ -42,10 +41,10 @@ WRAPPER_PID=$!
 # 观察 5 秒
 sleep 5
 
-# 清理
+# 只清理测试启动的进程
 kill -9 $WRAPPER_PID 2>/dev/null
-pkill -9 -f claude_code_wrapper_pty.py 2>/dev/null
-pkill -9 claude 2>/dev/null
+# 杀掉测试 wrapper 的子进程
+pkill -9 -P $WRAPPER_PID 2>/dev/null
 
 echo ""
 echo "=========================================="
