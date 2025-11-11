@@ -136,11 +136,11 @@ auto_load_ai_expert() {
             export IZSH_CURRENT_EXPERT="$expert_id"
             export IZSH_EXPERT_PROMPT="$prompt_content"
 
-            # 显示欢迎消息（可通过配置关闭）
-            if [[ "$IZSH_SHOW_EXPERT_WELCOME" != "false" ]]; then
+            # 显示欢迎消息（默认关闭，可通过 IZSH_SHOW_EXPERT_WELCOME=true 启用）
+            if [[ "$IZSH_SHOW_EXPERT_WELCOME" == "true" ]]; then
                 local expert_name=$(get_expert_name "$expert_id")
-                echo -e "\033[36m🤖 已加载 AI 专家: $expert_name\033[0m"
-                echo -e "\033[33m💡 提示: 您可以使用 'ai-expert view $expert_id' 查看专家提示词\033[0m"
+                echo -e "\033[36m🤖 已加载 AI 专家: $expert_name\033[0m" >&2
+                echo -e "\033[33m💡 提示: 您可以使用 'ai-expert view $expert_id' 查看专家提示词\033[0m" >&2
             fi
         fi
     else
