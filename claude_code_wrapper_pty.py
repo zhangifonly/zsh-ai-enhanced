@@ -499,14 +499,15 @@ class ClaudeCodeWrapperPTY:
 
     def run(self, command_args):
         """运行 Claude Code 并处理交互"""
-        print("🤖 AI 自动确认模式已启用")
-        print(f"提示：所有确认将在 {self.timeout} 秒后自动由 AI 选择")
+        # 启动提示输出到 stderr，不干扰 claude 的正常输出
+        print("🤖 AI 自动确认模式已启用", file=sys.stderr)
+        print(f"提示：所有确认将在 {self.timeout} 秒后自动由 AI 选择", file=sys.stderr)
         if not self.show_indicator:
-            print("📋 状态指示器：已禁用（设置 IZSH_SHOW_INDICATOR=1 启用）")
+            print("📋 状态指示器：已禁用（设置 IZSH_SHOW_INDICATOR=1 启用）", file=sys.stderr)
         if self.debug_mode:
-            print("🔧 调试模式：已启用")
-        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        print("")
+            print("🔧 调试模式：已启用", file=sys.stderr)
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", file=sys.stderr)
+        print("", file=sys.stderr)
 
         # 检查 stdin 是否是 TTY
         is_tty = sys.stdin.isatty()

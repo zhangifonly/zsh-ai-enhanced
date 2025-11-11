@@ -147,7 +147,7 @@ recent_path_command() {
 
     # 如果参数是数字，切换到第N个路径
     local index=0
-    if [[ "$action" =~ ^[0-9]+$ ]]; then
+    if [[ -n "$action" ]] && [[ "$action" == <-> ]]; then
         index=$((action - 1))  # 用户输入从1开始，索引从0开始
     fi
 
