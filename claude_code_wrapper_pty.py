@@ -499,6 +499,9 @@ class ClaudeCodeWrapperPTY:
 
     def run(self, command_args):
         """运行 Claude Code 并处理交互"""
+        # 清屏：清除之前的文字残留
+        print("\033[2J\033[H", end="", flush=True)
+
         # 启动提示输出到 stderr，不干扰 claude 的正常输出
         print("🤖 AI 自动确认模式已启用", file=sys.stderr)
         print(f"提示：所有确认将在 {self.timeout} 秒后自动由 AI 选择", file=sys.stderr)
